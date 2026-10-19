@@ -1,6 +1,6 @@
 # Lab Report, Code Quality and Design Quality
 
-Repository URL:
+Repository URL: https://github.com/Prachhhh/itcs382-lab
 
 ## Tools
 

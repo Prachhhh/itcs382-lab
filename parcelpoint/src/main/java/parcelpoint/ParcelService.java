@@ -3,13 +3,15 @@ package parcelpoint;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ParcelService {
+    private static final Logger LOGGER = Logger.getLogger(ParcelService.class.getName());
+
     private List<Locker> lockers = new ArrayList<>();
     private List<Parcel> parcels = new ArrayList<>();
-    private int maxParcels = 100;
 
     public ParcelService() {
         lockers.add(new Locker(1, 1));
@@ -27,7 +29,7 @@ public class ParcelService {
                 locker.setParcel(parcel);
                 parcel.status = "STORED";
                 parcels.add(parcel);
-                System.out.println("SMS to " + parcel.getStudentId() + ": parcel "
+                LOGGER.info(() -> "SMS to " + parcel.getStudentId() + ": parcel "
                         + parcel.getCode() + " is in locker " + locker.getNumber());
                 saveToFile();
                 return locker;
@@ -39,7 +41,7 @@ public class ParcelService {
     public double pickUp(String code, int days) {
         for (Locker locker : lockers) {
             Parcel parcel = locker.getParcel();
-            if (parcel != null && parcel.getCode() == code) {
+            if (parcel != null && parcel.getCode().equals(code)) {
                 locker.setParcel(null);
                 parcel.status = "PICKED_UP";
                 saveToFile();
@@ -64,20 +66,20 @@ public class ParcelService {
     public void printParcels(boolean forStaff) {
         for (Parcel parcel : parcels) {
             if (forStaff) {
-                System.out.println(parcel.getCode() + " " + parcel.getStudentId() + " " + parcel.status);
+                LOGGER.info(() -> parcel.getCode() + " " + parcel.getStudentId() + " " + parcel.status);
             } else if (parcel.status.equals("STORED")) {
-                System.out.println(parcel.getCode() + " is waiting");
+                LOGGER.info(parcel.getCode() + " is waiting");
             }
         }
     }
 
     private void saveToFile() {
-        try {
-            FileWriter writer = new FileWriter("parcels.csv");
+        try (FileWriter writer = new FileWriter("parcels.csv")) {
             for (Parcel parcel : parcels) {
                 writer.write(parcel.getCode() + "," + parcel.status + "\n");
             }
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to save parcels to parcels.csv", e);
         }
     }
 }

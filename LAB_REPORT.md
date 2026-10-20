@@ -10,7 +10,7 @@ Repository URL: https://github.com/Prachhhh/itcs382-lab
 | Maven | 2.10.0 |
 | IDE | Visual Studio Code |
 | SonarQube for IDE | 6.1.1 |
-| AI tool and exact model | Claude |
+| AI tool and exact model | Claude, Sonnet 5.5 Medium |
 
 ## Task 1. SonarQube on the starter code
 
@@ -85,52 +85,58 @@ Table 3. What you did with each SonarQube issue in Table 1
 | 12 | Fixed | Commit |
 | 13 | Fixed | Commit |
 
-Number of SonarQube issues that remain after your fixes:
+Number of SonarQube issues that remain after your fixes: 0
 
 The two design problems that you fixed
 
 | Design problem (course term) | What you changed | Commit |
 | --- | --- | --- |
-| | | |
+| SonarQube Warning | code and fix all the problem on Table 1 | fixed |
 | | | |
 
-Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv:
+Output of the program after your fixes, for the commands `store P1 6501 2`, `pickup P1 5` and `staff`, and the content of parcels.csv: 
 
 ```text
-
+P1,PICKED_UP
 ```
 
 ## Task 4. AI-generated poor and good designs
 
 | Item | bikeshare-poor | bikeshare-good |
 | --- | --- | --- |
-| Date | | |
-| AI tool and exact model | | |
-| Prompt (B or C as given, or your changed prompt in full) | | |
-| Builds with mvn package (yes or no) | | |
-| Number of classes, interfaces, enums and records | | |
-| SonarQube issues, total | | |
-| SonarQube issues, by rule | | |
-| AI review findings in Check 1 | | |
-| AI review findings in Check 2 | | |
-| Review output file in the reviews folder | | |
+| Date | 20-Oct-2026 | 20-Oct-2026 |
+| AI tool and exact model | Claude, Sonnet 5.5 Medium | Claude, Sonnet 5.5 Medium |
+| Prompt (B or C as given, or your changed prompt in full) | B | C |
+| Builds with mvn package (yes or no) | yes | yes |
+| Number of classes, interfaces, enums and records | 1 | 10 |
+| SonarQube issues, total | 18 | 1 |
+| SonarQube issues, by rule | 18 | 1 |
+| AI review findings in Check 1 | 5 | 5 |
+| AI review findings in Check 2 | 11 | 12 |
+| Review output file in the reviews folder | bikeshare-poor-review.md | bikeshare-good-review.md |
 
 4.1 Did SonarQube report any cohesion or coupling problem in bikeshare-poor? Quote the rule and the message if it did.
+No, it didn't.
 
 4.2 Did the AI review tell the two versions apart? Give one finding for bikeshare-poor that does not appear for bikeshare-good.
+Bikeshare-good doesn't have cohesion about rent.
 
 4.3 Which version would you rather extend with a new member type, such as a visitor who pays 4 baht per minute, and why?
+Bikeshare-good because each module is independent, and can be added without affect other.
 
 ## Task 5. Reflection
 
 5.1 What does SonarQube check, and what does it not check? Answer with examples from this lab.
+SonarQube check about code quality, but hardly to check cohension, coupling, and Connascence
 
 5.2 When should you not trust the AI review? Give an example from this lab.
+When the AI give the solution out of range and not explain clearly
 
 5.3 What will you do differently in Project Phase 2 after this lab?
+We'll use tool that I learn from the lab to check code quality and fix it to have more quality
 
 ## AI usage declaration
 
 | AI tool and exact model | Purpose | Files or parts that it produced or changed | How you checked its output |
 | --- | --- | --- | --- |
-| | | | |
+| Claude, Sonnet 5.5 Medium | To make code review part and develop project | bikeshare-poor folder, bikeshare-good folder, parcelpoint folder | Read the output |
